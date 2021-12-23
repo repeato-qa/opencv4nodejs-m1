@@ -1,0 +1,15 @@
+vs
+.vs
+.vscode
+build
+bin
+*.log
+data
+test
+examples
+doc
+ci
+.dockerignore
+dist
+prebuilds
+.github

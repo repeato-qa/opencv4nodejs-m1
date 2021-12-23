@@ -1,0 +1,58 @@
+{
+  "name": "opencv4nodejs-m1",
+  "version": "0.0.1",
+  "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
+  "keywords": [
+    "opencv",
+    "cv",
+    "computer vision",
+    "face",
+    "detection",
+    "recognition",
+    "machine",
+    "learning",
+    "neural",
+    "network",
+    "async",
+    "typescript"
+  ],
+  "author": {
+    "name": "Simon Hofmann",
+    "email": "kontak@s1h.org",
+    "url": "https://s1h.org"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nut-tree/opencv4nodejs"
+  },
+  "bugs": {
+    "url": "https://github.com/nut-tree/opencv4nodejs/issues"
+  },
+  "homepage": "https://github.com/nut-tree/opencv4nodejs#readme",
+  "main": "./lib/opencv4nodejs.js",
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "build": "node ./install/dependencies.js && run-script-os",
+    "build:darwin": ".build/build_macos.sh",
+    "build:default": ".build/build.sh",
+    "clean": "node-gyp clean",
+    "configure": "node-gyp configure",
+    "rebuild": "npm run configure && node-gyp rebuild --jobs max",
+    "rebuild:arm64": "npm run configure && node-gyp rebuild --arch arm64 --jobs max"
+  },
+  "gypfile": true,
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "nan": "^2.15.0",
+    "native-node-utils": "^0.2.7",
+    "npmlog": "^5.0.1",
+    "run-script-os": "^1.1.6"
+  },
+  "optionalDependencies": {
+    "@types/node": ">6"
+  },
+  "opencv4nodejs": {
+    "disableAutoBuild": 1
+  }
+}
