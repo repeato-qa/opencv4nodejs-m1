@@ -33,9 +33,10 @@
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
+    "install": "npm run build",
     "build": "node ./install/dependencies.js && run-script-os",
     "build:darwin": ".build/build_macos.sh",
-    "build:default": ".build/build.sh",
+    "build:default": "npm run rebuild",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
     "rebuild": "npm run configure && node-gyp rebuild --jobs max",
