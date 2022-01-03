@@ -18,7 +18,7 @@ if (!process.env["OPENCV4NODEJS_PREBUILT_SKIP_DEPENDENCIES"]) {
     const op = process.platform;
 
     console.log(`Installing prebuilt OpenCV for plattform ${op}`);
-    install(`@nut-tree/opencv-${op}@next`);
+    install(`@nut-tree/opencv-${op}@4.5.5`);
     packages[op].forEach(pkg => {
         console.log(`Installing additional runtime dependency '${pkg}'`);
         install(pkg);

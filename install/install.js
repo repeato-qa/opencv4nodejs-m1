@@ -4,9 +4,9 @@ const fs = require("fs");
 const log = require("npmlog");
 
 const lib = {
-  win32: `opencv_world454.dll`,
-  linux: `libopencv_world.so.4.5`,
-  darwin: `libopencv_world.4.5.dylib`
+  win32: `opencv_world455.dll`,
+  linux: `libopencv_world.so.405`,
+  darwin: `libopencv_world.405.dylib`
 };
 
 const baseLibFolder = {
