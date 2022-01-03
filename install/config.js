@@ -4,7 +4,7 @@ const { basename, join } = require("path");
 const fs = require("fs");
 
 const lib = {
-  win32: `opencv_world455.bin`,
+  win32: `opencv_world455.lib`,
   linux: `libopencv_world.so.405`,
   darwin: `libopencv_world.405.dylib`
 };
