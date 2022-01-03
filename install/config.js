@@ -4,13 +4,13 @@ const { basename, join } = require("path");
 const fs = require("fs");
 
 const lib = {
-  win32: `opencv_world455.dll`,
+  win32: `opencv_world455.bin`,
   linux: `libopencv_world.so.405`,
   darwin: `libopencv_world.405.dylib`
 };
 
 const baseLibFolder = {
-  win32: join(__dirname, "..", "deps", "win32", "x64", "vc16", "bin").replace(/\\/g, '\\\\'),
+  win32: join(__dirname, "..", "deps", "win32", "x64", "vc16", "lib").replace(/\\/g, '\\\\'),
   linux: join(__dirname, "..", "deps", "linux"),
   darwin: join(__dirname, "..", "deps", "darwin")
 };
