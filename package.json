@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-m1",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -24,17 +24,17 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nut-tree/opencv4nodejs"
+    "url": "git+https://github.com/s1h-org/opencv4nodejs-m1"
   },
   "bugs": {
-    "url": "https://github.com/nut-tree/opencv4nodejs/issues"
+    "url": "https://github.com/s1h-org/opencv4nodejs-m1/issues"
   },
-  "homepage": "https://github.com/nut-tree/opencv4nodejs#readme",
+  "homepage": "https://github.com/s1h-org/opencv4nodejs-m1#readme",
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "install": "npm run build",
-    "build": "node ./install/dependencies.js && run-script-os",
+    "install": "echo 'Installing...'",
+    "build": "run-script-os && npm pack",
     "build:darwin": ".build/build_macos.sh",
     "build:default": "npm run rebuild",
     "clean": "node-gyp clean",

@@ -4,21 +4,21 @@ const { basename, join } = require("path");
 const fs = require("fs");
 
 const lib = {
-  win32: `opencv_world454.lib`,
-  linux: `libopencv_world.so.4.5`,
-  darwin: `libopencv_world.4.5.dylib`
+  win32: `opencv_world455.dll`,
+  linux: `libopencv_world.so.405`,
+  darwin: `libopencv_world.405.dylib`
 };
 
 const baseLibFolder = {
-  win32: join(__dirname, "..", "node_modules", "@nut-tree", "opencv-win32", "x64", "vc16", "lib").replace(/\\/g, '\\\\'),
-  linux: join(__dirname, "..", "node_modules", "@nut-tree", "opencv-linux", "lib"),
-  darwin: join(__dirname, "..", "node_modules", "@nut-tree", "opencv-darwin", "lib")
+  win32: join(__dirname, "..", "deps", "win32", "x64", "vc16", "bin").replace(/\\/g, '\\\\'),
+  linux: join(__dirname, "..", "deps", "linux"),
+  darwin: join(__dirname, "..", "deps", "darwin")
 };
 
 const includeFolder = {
-  win32: join(__dirname, "..", "node_modules", "@nut-tree", "opencv-win32", "include").replace(/\\/g, '\\\\'),
-  linux: join(__dirname, "..", "node_modules", "@nut-tree", "opencv-linux", "include", "opencv4"),
-  darwin: join(__dirname, "..", "node_modules", "@nut-tree", "opencv-darwin", "include", "opencv4"),
+  win32: join(__dirname, "..", "deps", "include").replace(/\\/g, '\\\\'),
+  linux: join(__dirname, "..", "deps", "include"),
+  darwin: join(__dirname, "..", "deps", "include"),
 };
 
 const libDir = baseLibFolder[process.platform];

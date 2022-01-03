@@ -1,7 +1,7 @@
 vs
 .vs
 .vscode
-build
+deps
 bin
 *.log
 data
