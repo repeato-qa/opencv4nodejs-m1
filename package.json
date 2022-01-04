@@ -37,10 +37,15 @@
     "build": "run-script-os && npm pack",
     "build:darwin": ".build/build_macos.sh",
     "build:default": "npm run rebuild",
+    "build:electron": "run-script-os && npm pack",
+    "build:electron:darwin": ".build/build_electron_macos.sh",
+    "build:electron:default": "npm run electron:rebuild",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
-    "rebuild": "npm run configure && node-gyp rebuild --jobs max",
-    "rebuild:arm64": "npm run configure && node-gyp rebuild --arch arm64 --jobs max"
+    "rebuild": "npm run configure && node-gyp rebuild --arch x64 --jobs max",
+    "rebuild:arm64": "npm run configure && node-gyp rebuild --arch arm64 --jobs max",
+    "electron:rebuild": "HOME=~/.electron-gyp node-gyp rebuild --target=12.2.3 --arch=x64 --dist-url=https://electronjs.org/headers --jobs max",
+    "electron:rebuild:arm64": "HOME=~/.electron-gyp node-gyp rebuild --target=12.2.3 --arch=arm64 --dist-url=https://electronjs.org/headers --jobs max"
   },
   "gypfile": true,
   "dependencies": {
