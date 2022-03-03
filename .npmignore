@@ -1,7 +1,6 @@
 vs
 .vs
 .vscode
-deps
 bin
 *.log
 data
