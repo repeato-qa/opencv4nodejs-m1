@@ -1,6 +1,10 @@
 #include "macros.h"
 #include "CvBinding.h"
+#if CV_VERSION_GREATER_EQUAL(4, 4, 0)
+#include <opencv2/features2d.hpp>
+#else
 #include <opencv2/xfeatures2d.hpp>
+#endif
 #include "features2d/FeatureDetector.h"
 
 #ifndef __FF_SIFTDETECTOR_H__
@@ -62,7 +66,6 @@ public:
 					edgeThreshold->ref(),
 					sigma->ref()
 				);
-				#endif
 			};
 
 			modifySelf = [=](SIFTDetector* self) {

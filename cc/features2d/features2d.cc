@@ -18,6 +18,9 @@
 #include "detectors/MSERDetector.h"
 #include "detectors/ORBDetector.h"
 #include "detectors/SimpleBlobDetector.h"
+#if CV_VERSION_GREATER_EQUAL(4, 4, 0)
+#include "../xfeatures2d/SIFTDetector.h"
+#endif
 
 NAN_MODULE_INIT(Features2d::Init) {
 	KeyPoint::Init(target);
@@ -35,6 +38,9 @@ NAN_MODULE_INIT(Features2d::Init) {
 	MSERDetector::Init(target);
 	ORBDetector::Init(target);
 	SimpleBlobDetector::Init(target);
+	#if CV_VERSION_GREATER_EQUAL(4, 4, 0)
+	SIFTDetector::Init(target);
+	#endif
 
 	v8::Local<v8::Object> agastTypes = Nan::New<v8::Object>();
 	FF_SET_JS_PROP(agastTypes, AGAST_5_8, Nan::New<v8::Integer>(cv::AgastFeatureDetector::AGAST_5_8));
