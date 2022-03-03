@@ -1,7 +1,6 @@
 #include "opencv_modules.h"
 
-#ifdef HAVE_OPENCV_XFEATURES2D
-
+#if (CV_VERSION_LOWER_THAN(4, 4, 0) && defined(HAVE_OPENCV_XFEATURES2D)) || (CV_VERSION_GREATER_EQUAL(4, 4, 0) && defined(HAVE_OPENCV_FEATURES2D))
 #include "SIFTDetector.h"
 
 Nan::Persistent<v8::FunctionTemplate> SIFTDetector::constructor;
