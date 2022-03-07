@@ -10,7 +10,7 @@ const lib = {
 };
 
 const baseLibFolder = {
-  win32: join(__dirname, "..", "deps", "win32", "x64", "vc16", "lib").replace(/\\/g, '\\\\'),
+  win32: join(__dirname, "..", "deps", "win32", "x64", "vc17", "lib").replace(/\\/g, '\\\\'),
   linux: join(__dirname, "..", "deps", "linux"),
   darwin: join(__dirname, "..", "deps", "darwin")
 };
