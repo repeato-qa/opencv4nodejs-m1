@@ -10,7 +10,7 @@ const lib = {
 };
 
 const baseLibFolder = {
-  win32: `${__dirname}/../node_modules/@nut-tree/opencv-win32/x64/vc16/bin`,
+  win32: `${__dirname}/../node_modules/@nut-tree/opencv-win32/x64/vc17/bin`,
   linux: `${__dirname}/../node_modules/@nut-tree/opencv-linux/lib/`,
   darwin: `${__dirname}/../node_modules/@nut-tree/opencv-darwin/lib/`
 };
