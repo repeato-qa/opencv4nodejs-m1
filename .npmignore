@@ -1,7 +1,6 @@
 vs
 .vs
 .vscode
-bin
 *.log
 data
 test
