@@ -55,6 +55,6 @@
     "disableAutoBuild": 1
   },
   "devDependencies": {
-    "prebuild": "^10.0.0"
+    "prebuild": "^11.0.4"
   }
 }
