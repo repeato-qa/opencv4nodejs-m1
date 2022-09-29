@@ -1,0 +1,83 @@
+name: Create tagged release
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  prebuild-node:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        node: [ 18 ]
+        task: [ prebuild ]
+        runtime: [ node ]
+        target: [ 18.0.0 ]
+        arch: [ x64, arm64 ]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Configure msvs version on Windows
+        if: ${{matrix.os == 'windows-latest'}}
+        run: npm config set msvs_version 2022
+      - name: Install
+        run: npm ci --unsafe-perm
+      - name: Prebuild
+        shell: bash
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} "\.(node|a|so|dylib|lib|dll).*$"
+        # run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
+      - name: List prebuilds
+        shell: bash
+        run: ls -la ./prebuilds
+
+  prebuild-electron:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        node: [ 18 ]
+        task: [ prebuild ]
+        runtime: [ electron ]
+        target: [ 12.0.0 ]
+        arch: [ x64, arm64 ]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Configure msvs version on Windows
+        if: ${{matrix.os == 'windows-latest'}}
+        run: npm config set msvs_version 2022
+      - name: Install
+        run: npm ci --unsafe-perm
+      - name: Publish prebuild
+        shell: bash
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$"
+        # run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
+      - name: List prebuilds
+        shell: bash
+        run: ls -la ./prebuilds
+
+  # deploy:
+  #   needs:
+  #     - prebuild-node
+  #     - prebuild-electron
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Set up Git repository
+  #       uses: actions/checkout@v2
+  #     - name: Set up node
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: 14
+  #     - name: Publish tagged release
+  #       uses: JS-DevTools/npm-publish@v1
+  #       with:
+  #         token: ${{ secrets.NPM_TOKEN }}
