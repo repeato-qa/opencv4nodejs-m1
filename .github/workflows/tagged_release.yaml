@@ -8,7 +8,7 @@ jobs:
   prebuild-node:
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
         node: [ 18 ]
         task: [ prebuild ]
         runtime: [ node ]
@@ -28,7 +28,6 @@ jobs:
       - name: Install
         run: npm ci --unsafe-perm
       - name: Prebuild
-        shell: bash
         run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$"
         # run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
       - name: List prebuilds
@@ -38,7 +37,7 @@ jobs:
   prebuild-electron:
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
         node: [ 18 ]
         task: [ prebuild ]
         runtime: [ electron ]
@@ -57,8 +56,7 @@ jobs:
         run: npm config set msvs_version 2022
       - name: Install
         run: npm ci --unsafe-perm
-      - name: Publish prebuild
-        shell: bash
+      - name: Prebuild
         run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$"
         # run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
       - name: List prebuilds
