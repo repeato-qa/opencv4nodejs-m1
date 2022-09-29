@@ -1,0 +1,37 @@
+name: Run CI
+on:
+  push:
+    branches-ignore:
+      - develop
+      - release/**
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        node: [ "18" ]
+
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Configure msvs version on Windows
+        if: ${{matrix.os == 'windows-latest'}}
+        run: npm config set msvs_version 2022 
+      - name: Run tests
+        env:
+          OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
+        run: |
+          echo installing
+          npm install --unsafe-perm
+          echo running tests
+          cd ./test
+          npm install --unsafe-perm
+          npm test
+          npm run test-externalMemTracking
