@@ -28,7 +28,7 @@ jobs:
       - name: Install
         run: npm ci --unsafe-perm
       - name: Prebuild
-        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\\.(node|a|so|dylib|lib|dll).*$"
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}}
         # run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
       - name: List prebuilds
         shell: bash
@@ -57,7 +57,7 @@ jobs:
       - name: Install
         run: npm ci --unsafe-perm
       - name: Prebuild
-        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\\.(node|a|so|dylib|lib|dll).*$"
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}}
         # run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
       - name: List prebuilds
         shell: bash
