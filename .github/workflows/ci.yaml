@@ -24,14 +24,8 @@ jobs:
       - name: Configure msvs version on Windows
         if: ${{matrix.os == 'windows-latest'}}
         run: npm config set msvs_version 2022 
-      - name: Run tests
-        env:
-          OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
+      - name: Build 
         run: |
           echo installing
           npm install --unsafe-perm
-          echo running tests
-          cd ./test
-          npm install --unsafe-perm
-          npm test
-          npm run test-externalMemTracking
+          npm run build
