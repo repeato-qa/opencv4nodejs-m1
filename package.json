@@ -24,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/s1h-org/opencv4nodejs-m1"
+    "url": "git+https://github.com/repeato-qa/opencv4nodejs-m1"
   },
   "bugs": {
     "url": "https://github.com/s1h-org/opencv4nodejs-m1/issues"
@@ -34,18 +34,11 @@
   "typings": "./lib/index.d.ts",
   "scripts": {
     "install": "echo 'Installing...'",
-    "build": "run-script-os && npm pack",
-    "build:darwin": ".build/build_macos.sh",
-    "build:default": "npm run rebuild",
-    "build:electron": "run-script-os && npm pack",
-    "build:electron:darwin": ".build/build_electron_macos.sh",
-    "build:electron:default": "npm run electron:rebuild",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
-    "rebuild": "npm run configure && node-gyp rebuild --arch x64 --jobs max",
-    "rebuild:arm64": "npm run configure && node-gyp rebuild --arch arm64 --jobs max",
-    "electron:rebuild": "HOME=~/.electron-gyp node-gyp rebuild --target=12.2.3 --arch=x64 --dist-url=https://electronjs.org/headers --jobs max",
-    "electron:rebuild:arm64": "HOME=~/.electron-gyp node-gyp rebuild --target=12.2.3 --arch=arm64 --dist-url=https://electronjs.org/headers --jobs max"
+    "build": "npm run rebuild",
+    "rebuild": "npm run configure && node-gyp rebuild --jobs max",
+    "prebuild": "prebuild"
   },
   "gypfile": true,
   "dependencies": {
@@ -60,5 +53,8 @@
   },
   "opencv4nodejs": {
     "disableAutoBuild": 1
+  },
+  "devDependencies": {
+    "prebuild": "^11.0.4"
   }
 }
