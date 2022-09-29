@@ -8,7 +8,7 @@ jobs:
   prebuild-node:
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ ubuntu-latest, macos-latest ]
         node: [ 18 ]
         task: [ prebuild ]
         runtime: [ node ]
@@ -29,7 +29,7 @@ jobs:
         run: npm ci --unsafe-perm
       - name: Prebuild
         shell: bash
-        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex \"\.(node|a|so|dylib|lib|dll).*$\"
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$"
         # run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
       - name: List prebuilds
         shell: bash
@@ -38,7 +38,7 @@ jobs:
   prebuild-electron:
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ ubuntu-latest, macos-latest ]
         node: [ 18 ]
         task: [ prebuild ]
         runtime: [ electron ]
@@ -59,7 +59,7 @@ jobs:
         run: npm ci --unsafe-perm
       - name: Publish prebuild
         shell: bash
-        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex \"\.(node|a|so|dylib|lib|dll).*$\"
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$"
         # run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} --include-regex "\.(node|a|so|dylib|lib|dll).*$" -u ${{ secrets.GITHUB_TOKEN }}
       - name: List prebuilds
         shell: bash
