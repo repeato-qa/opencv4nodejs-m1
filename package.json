@@ -27,9 +27,9 @@
     "url": "git+https://github.com/repeato-qa/opencv4nodejs-m1"
   },
   "bugs": {
-    "url": "https://github.com/s1h-org/opencv4nodejs-m1/issues"
+    "url": "https://github.com/repeato-qa/opencv4nodejs-m1/issues"
   },
-  "homepage": "https://github.com/s1h-org/opencv4nodejs-m1#readme",
+  "homepage": "https://github.com/repeato-qa/opencv4nodejs-m1#readme",
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
@@ -46,6 +46,7 @@
     "nan": "^2.15.0",
     "native-node-utils": "^0.2.7",
     "npmlog": "^5.0.1",
+    "prebuild-install": "^7.1.1",
     "run-script-os": "^1.1.6"
   },
   "optionalDependencies": {
