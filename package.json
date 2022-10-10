@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-m1",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -33,13 +33,12 @@
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "install": "echo 'Installing...'",
+    "install": "prebuild-install || npm run build",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
     "build": "npm run rebuild",
     "rebuild": "npm run configure && node-gyp rebuild --jobs max",
-    "prebuild": "prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\"",
-    "install-prebuild": "prebuild-install"
+    "prebuild": "prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\""
   },
   "gypfile": true,
   "dependencies": {

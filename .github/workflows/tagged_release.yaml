@@ -4,6 +4,19 @@ on:
     tags:
       - v*.*.*
 
+# Runs on every new tag and performs the following steps:
+# For every platform, build and compile a binding for platform/runtime combo
+  # This is done for the following platforms
+      # macOS x64
+      # macOS arm64
+      # Windows
+      # Linux
+    # And the following runtimes
+      # node
+      # electron
+      #
+# So once completed, 8 binaries will have been uploaded to the respective GitHub release
+# Once prebuilds are done, a new package version is published on npm
 jobs:
   prebuild-node-macos:
     strategy:
