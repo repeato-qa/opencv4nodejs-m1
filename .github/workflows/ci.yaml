@@ -1,0 +1,25 @@
+name: Run CI
+on:
+  pull_request:
+
+# Runs on every pull request to build once and check for any compile errors
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, window-latest ]
+        node: [ "18" ]
+
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Build 
+        run: |
+          echo installing
+          npm install --unsafe-perm
+          npm run build

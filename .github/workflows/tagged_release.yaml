@@ -1,0 +1,149 @@
+name: Create tagged release
+on:
+  push:
+    tags:
+      - v*.*.*
+
+# Runs on every new tag and performs the following steps:
+# For every platform, build and compile a binding for platform/runtime combo
+  # This is done for the following platforms
+      # macOS x64
+      # macOS arm64
+      # Windows
+      # Linux
+    # And the following runtimes
+      # node
+      # electron
+      #
+# So once completed, 8 binaries will have been uploaded to the respective GitHub release
+# Once prebuilds are done, a new package version is published on npm
+jobs:
+  prebuild-node-macos:
+    strategy:
+      matrix:
+        os: [ macos-latest ]
+        node: [ 18 ]
+        task: [ prebuild ]
+        runtime: [ node ]
+        target: [ 16.13.0 ]
+        arch: [ x64, arm64 ]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Install
+        run: npm ci --unsafe-perm
+      - name: Prebuild macOS
+        shell: bash
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} -u ${{ secrets.REPO_TOKEN }}
+      - name: List prebuilds
+        shell: bash
+        run: ls -la ./prebuilds
+  prebuild-node:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-2019 ]
+        node: [ 18 ]
+        task: [ prebuild ]
+        runtime: [ node ]
+        target: [ 16.13.0 ]
+        arch: [ x64 ]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Configure msvs version on Windows
+        if: ${{matrix.os == 'windows-2019'}}
+        run: npm config set msvs_version 2019
+      - name: Install
+        run: npm ci --unsafe-perm
+      - name: Prebuild 
+        shell: bash
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} -u ${{ secrets.REPO_TOKEN }}
+      - name: List prebuilds
+        shell: bash
+        run: ls -la ./prebuilds
+
+  prebuild-electron-macos:
+    strategy:
+      matrix:
+        os: [ macos-latest ]
+        node: [ 18 ]
+        task: [ prebuild ]
+        runtime: [ electron ]
+        target: [ 12.2.3 ]
+        arch: [ x64, arm64 ]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Configure msvs version on Windows
+        if: ${{matrix.os == 'windows-2019'}}
+        run: npm config set msvs_version 2019 
+      - name: Install
+        run: npm ci --unsafe-perm
+      - name: Prebuild macOS
+        shell: bash
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} -u ${{ secrets.REPO_TOKEN }}
+      - name: List prebuilds
+        shell: bash
+        run: ls -la ./prebuilds
+  prebuild-electron:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-2019 ]
+        node: [ 18 ]
+        task: [ prebuild ]
+        runtime: [ electron ]
+        target: [ 12.2.3 ]
+        arch: [ x64 ]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.node}}
+      - name: Configure msvs version on Windows
+        if: ${{matrix.os == 'windows-2019'}}
+        run: npm config set msvs_version 2019 
+      - name: Install
+        run: npm ci --unsafe-perm
+      - name: Prebuild 
+        shell: bash
+        run: npm run prebuild -- -t ${{matrix.target}} -r ${{matrix.runtime}} -a ${{matrix.arch}} -u ${{ secrets.REPO_TOKEN }}
+      - name: List prebuilds
+        shell: bash
+        run: ls -la ./prebuilds
+
+  deploy:
+    needs:
+      - prebuild-node
+      - prebuild-node-macos
+      - prebuild-electron
+      - prebuild-electron-macos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+      - name: Publish tagged release
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_RELEASE_PUBLISH_TOKEN }}

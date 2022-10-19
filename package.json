@@ -1,6 +1,6 @@
 {
   "name": "opencv4nodejs-m1",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Asynchronous OpenCV 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -24,28 +24,21 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/s1h-org/opencv4nodejs-m1"
+    "url": "git+https://github.com/repeato-qa/opencv4nodejs-m1"
   },
   "bugs": {
-    "url": "https://github.com/s1h-org/opencv4nodejs-m1/issues"
+    "url": "https://github.com/repeato-qa/opencv4nodejs-m1/issues"
   },
-  "homepage": "https://github.com/s1h-org/opencv4nodejs-m1#readme",
+  "homepage": "https://github.com/repeato-qa/opencv4nodejs-m1#readme",
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "install": "echo 'Installing...'",
-    "build": "run-script-os && npm pack",
-    "build:darwin": ".build/build_macos.sh",
-    "build:default": "npm run rebuild",
-    "build:electron": "run-script-os && npm pack",
-    "build:electron:darwin": ".build/build_electron_macos.sh",
-    "build:electron:default": "npm run electron:rebuild",
+    "install": "prebuild-install || npm run build",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
-    "rebuild": "npm run configure && node-gyp rebuild --arch x64 --jobs max",
-    "rebuild:arm64": "npm run configure && node-gyp rebuild --arch arm64 --jobs max",
-    "electron:rebuild": "HOME=~/.electron-gyp node-gyp rebuild --target=12.2.3 --arch=x64 --dist-url=https://electronjs.org/headers --jobs max",
-    "electron:rebuild:arm64": "HOME=~/.electron-gyp node-gyp rebuild --target=12.2.3 --arch=arm64 --dist-url=https://electronjs.org/headers --jobs max"
+    "build": "npm run rebuild",
+    "rebuild": "npm run configure && node-gyp rebuild --jobs max",
+    "prebuild": "prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\""
   },
   "gypfile": true,
   "dependencies": {
@@ -53,6 +46,7 @@
     "nan": "^2.15.0",
     "native-node-utils": "^0.2.7",
     "npmlog": "^5.0.1",
+    "prebuild-install": "^7.1.1",
     "run-script-os": "^1.1.6"
   },
   "optionalDependencies": {
@@ -60,5 +54,8 @@
   },
   "opencv4nodejs": {
     "disableAutoBuild": 1
+  },
+  "devDependencies": {
+    "prebuild": "^11.0.4"
   }
 }
