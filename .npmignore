@@ -9,5 +9,4 @@ doc
 ci
 .dockerignore
 dist
-prebuilds
 .github

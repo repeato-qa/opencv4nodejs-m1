@@ -33,12 +33,31 @@
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
+<<<<<<< HEAD
     "install": "prebuild-install || npm run build",
     "clean": "node-gyp clean",
     "configure": "node-gyp configure",
     "build": "npm run rebuild",
     "rebuild": "npm run configure && node-gyp rebuild --jobs max",
     "prebuild": "prebuild --include-regex \"\\.(node|a|so|dylib|lib|dll).*$\""
+=======
+    "install": "prebuild-install -r napi || echo 'Prebuild not available, using bundled build'",
+    "build": "run-script-os && npm pack",
+    "build:darwin": ".build/build_macos.sh",
+    "build:default": "npm run rebuild",
+    "build:electron": "run-script-os && npm pack",
+    "build:electron:darwin": ".build/build_electron_macos.sh",
+    "build:electron:default": "npm run electron:rebuild",
+    "clean": "node-gyp clean",
+    "configure": "node-gyp configure",
+    "rebuild": "npm run configure && node-gyp rebuild --arch x64 --jobs max",
+    "rebuild:arm64": "npm run configure && node-gyp rebuild --arch arm64 --jobs max",
+    "electron:rebuild": "HOME=~/.electron-gyp node-gyp rebuild --target=12.2.3 --arch=x64 --dist-url=https://electronjs.org/headers --jobs max",
+    "electron:rebuild:arm64": "HOME=~/.electron-gyp node-gyp rebuild --target=12.2.3 --arch=arm64 --dist-url=https://electronjs.org/headers --jobs max",
+    "prebuild": "prebuild -t 16.0.0 -t 18.0.0 -t 20.0.0 --strip",
+    "prebuild-electron": "prebuild -t 12.2.3 -r electron --strip",
+    "prebuild-upload": "prebuild --upload-all"
+>>>>>>> a44f57b (Implement GH actions workflow for building for various targets)
   },
   "gypfile": true,
   "engines": {
@@ -49,8 +68,15 @@
     "nan": "^2.20.0",
     "native-node-utils": "^0.2.7",
     "npmlog": "^5.0.1",
+<<<<<<< HEAD
     "prebuild-install": "^7.1.1",
+=======
+    "prebuild-install": "^7.1.2",
+>>>>>>> a44f57b (Implement GH actions workflow for building for various targets)
     "run-script-os": "^1.1.6"
+  },
+  "devDependencies": {
+    "prebuild": "^13.0.1"
   },
   "optionalDependencies": {
     "@types/node": ">6"
