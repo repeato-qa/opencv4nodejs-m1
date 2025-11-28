@@ -33,7 +33,7 @@
   "main": "./lib/opencv4nodejs.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "install": "prebuild-install -r napi || echo 'Prebuild not available, using bundled build'",
+    "install": "prebuild-install || echo 'Prebuild not available, using bundled build'",
     "build": "run-script-os && npm pack",
     "build:darwin": ".build/build_macos.sh",
     "build:default": "npm run rebuild",
