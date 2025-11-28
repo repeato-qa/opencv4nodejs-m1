@@ -118,7 +118,7 @@
                     "cc/xfeatures2d/SURFDetector.cc"
                 ],
                 "cflags": [
-                    "-std=c++11"
+                    "-std=c++17"
                 ],
                 "cflags!": [
                     "-fno-exceptions"
@@ -129,6 +129,7 @@
                 ],
                 "xcode_settings": {
                     "GCC_ENABLE_CPP_EXCEPTIONS": "YES",
+                    "CLANG_CXX_LANGUAGE_STANDARD": "c++17",
                     "MACOSX_DEPLOYMENT_TARGET": "11.6"
                 },
                 "conditions": [
@@ -143,7 +144,8 @@
                         "msvs_settings": {
                             "VCCLCompilerTool": {
                                 "ExceptionHandling": "2",
-                                "RuntimeLibrary": "2"
+                                "RuntimeLibrary": "2",
+                                "AdditionalOptions": ["/std:c++17"]
                             },
                         }
                     }],
