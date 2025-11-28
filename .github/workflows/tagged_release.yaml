@@ -50,7 +50,7 @@ jobs:
         node: [ 18 ]
         task: [ prebuild ]
         runtime: [ node ]
-        target: [ 18.0.0, 20.0.0, 22.0.0 ]
+        target: [ 16.0.0, 20.0.0, 22.0.0 ]
         arch: [ x64 ]
     runs-on: ${{matrix.os}}
     steps:
